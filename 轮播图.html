@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>动画-案例《轮播图》</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .slider {
+            height: 340px;
+            width: 790px;
+            margin: 100px auto;
+            position: relative;
+            /* z-index: 99; */
+        }
+
+        .masks {
+            position: absolute;
+            box-sizing: border-box;
+            padding: 5px;
+            bottom: 0;
+            left: 0;
+            width: 790px;
+            height: 40px;
+            background-color: #000;
+            opacity: 0.5;
+            z-index: 99;
+            display: none;
+
+        }
+
+        .box {
+            width: 100%;
+            height: 10px;
+            border: 1px solid black;
+            background-color: #aaa;
+            margin: 10px auto;
+        }
+
+        .loading {
+            width: 0;
+            height: 100%;
+            background-color: red;
+        }
+
+        ul {
+            height: 340px;
+            width: 790px;
+            overflow: hidden;
+        }
+
+        .slider li {
+            /* position: absolute; */
+            display: none;
+            /* z-index: 1; */
+        }
+
+        .slider li:first-child {
+            display: block;
+        }
+       
+    </style>
+</head>
+
+<body>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <div class="slider">
+        <!--图片容器  6图 -->
+        <ul>
+            <li><a href="#"><img src="images/jd/1.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/jd/2.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/jd/3.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/jd/4.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/jd/5.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/jd/6.jpg" alt=""></a></li>
+            <div class="masks">
+                <div class="box">
+                    <div class="loading"></div>
+                </div>
+            </div>
+        </ul>
+    </div>
+
+    <script src="./jquery-1.12.4.js"></script>
+    <script>
+        
+        $('.slider').on('mousemove', function (e) {
+           
+            // console.log(111);
+            console.log($('.slider').offset().left);
+
+            var x = e.pageX - $('.slider').offset().left;
+            console.log(x);
+            if (x >= 779) {
+                x = 780;
+            }
+            $('.loading').css('width', x);
+            if (x < 130) {
+                $('.slider>ul>li').eq(0).show().siblings().hide();
+                $('.masks').css('display', 'block');
+            }
+            if (x >= 130) {
+                $('.slider>ul>li').eq(1).show().siblings().hide();
+                $('.masks').css('display', 'block');
+            }
+            if (x >= 260) {
+                $('.slider>ul>li').eq(2).show().siblings().hide();
+                $('.masks').css('display', 'block');
+            }
+            if (x >= 390) {
+                $('.slider>ul>li').eq(3).show().siblings().hide();
+                $('.masks').css('display', 'block');
+            }
+            if (x >= 520) {
+                $('.slider>ul>li').eq(4).show().siblings().hide();
+                $('.masks').css('display', 'block');
+            }
+            if (x >= 650) {
+                $('.slider>ul>li').eq(5).show().siblings().hide();
+                $('.masks').css('display', 'block');
+            }
+        });
+
+        $('.slider').on('mouseout', function () {
+            $('.masks').css('display', 'none');
+        });
+    </script>
+
+</body>
+
+</html>
